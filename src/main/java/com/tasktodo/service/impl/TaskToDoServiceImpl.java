@@ -1,0 +1,57 @@
+package com.tasktodo.service.impl;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
+import com.tasktodo.model.Task;
+import com.tasktodo.service.TaskToDoService;
+
+@Service
+public class TaskToDoServiceImpl implements TaskToDoService {
+
+	private Map<String, Task> map = new HashMap<String, Task>();
+
+	@Override
+	public String addTask(String description) {
+		if (description == null || description.equals(""))
+			return null;
+		String id = UUID.randomUUID().toString();
+		map.put(id, new Task(id, description, false));
+		return id;
+	}
+
+	@Override
+	public Map<String, Task> getTasks() {
+		return map;
+	}
+
+	@Override
+	public String completeTask(String id) {
+		if (id == null || id.equals(""))
+			return null;
+		Task inCompletedTask = getTasks().get(id);
+		Task completedTask = new Task(id, inCompletedTask.getDesc(), true);
+		map.put(id, completedTask);
+		return id;
+	}
+
+	@Override
+	public String updateTask(String id, String newDesc) {
+		if (id == null || id.equals("") || newDesc == null || newDesc.equals(""))
+			return null;
+		Task oldTask = getTasks().get(id);
+		Task updatedTask = new Task(id, newDesc, oldTask.isCompleted());
+		map.put(id, updatedTask);
+		return id;
+	}
+
+	@Override
+	public void deleteCompletedTask() {
+		map = map.entrySet().stream().map(entry -> entry.getValue()).filter(task -> !task.isCompleted())
+				.collect(Collectors.toMap(task -> task.getId(), task -> task));
+	}
+}
