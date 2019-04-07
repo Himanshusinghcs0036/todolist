@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TasktodoApplication {
+public class TaskToDoApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TasktodoApplication.class, args);
+		SpringApplication.run(TaskToDoApplication.class, args);
 	}
 }

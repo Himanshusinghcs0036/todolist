@@ -12,6 +12,8 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.tasktodo.model.Task;
+import com.tasktodo.model.TaskDto;
+import com.tasktodo.model.TaskResponseDto;
 import com.tasktodo.service.TaskToDoService;
 
 @SpringBootTest
@@ -25,9 +27,9 @@ public class TaskToDoControllerTest {
 
 	@Test
 	public void testAddTask() {
-		String expected = "taskId";
+		TaskResponseDto expected = new TaskResponseDto("taskId");
 		Mockito.when(taskToDoService.addTask("description")).thenReturn(expected);
-		String actual = taskToDoController.addTask("description");
+		TaskResponseDto actual = taskToDoController.addTask(new TaskDto("description"));
 		assertEquals(expected, actual);
 	}
 

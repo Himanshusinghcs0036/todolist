@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.tasktodo.model.Task;
+import com.tasktodo.model.TaskResponseDto;
 import com.tasktodo.service.TaskToDoService;
 
 @Service
@@ -16,12 +17,12 @@ public class TaskToDoServiceImpl implements TaskToDoService {
 	private Map<String, Task> map = new HashMap<String, Task>();
 
 	@Override
-	public String addTask(String description) {
+	public TaskResponseDto addTask(String description) {
 		if (description == null || description.equals(""))
 			return null;
 		String id = UUID.randomUUID().toString();
 		map.put(id, new Task(id, description, false));
-		return id;
+		return new TaskResponseDto(id);
 	}
 
 	@Override
