@@ -1,13 +1,28 @@
 package com.tasktodo.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = Employee.class)
+@Entity
+@Table(name = "employee")
 public class Employee {
 
+	@Id
+	@Column
+	private Integer empId;
+
+	@Column
 	private String empName;
-	private String empId;
+
+	public Integer getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(Integer empId) {
+		this.empId = empId;
+	}
 
 	public String getEmpName() {
 		return empName;
@@ -17,16 +32,8 @@ public class Employee {
 		this.empName = empName;
 	}
 
-	public String getEmpId() {
-		return empId;
-	}
-
-	public void setEmpId(String empId) {
-		this.empId = empId;
-	}
-
 	@Override
 	public String toString() {
-		return "Employee [empName=" + empName + ", empId=" + empId + "]";
+		return "Employee [empId=" + empId + ", empName=" + empName + "]";
 	}
 }
