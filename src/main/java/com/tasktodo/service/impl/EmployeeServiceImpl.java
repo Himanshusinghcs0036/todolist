@@ -1,8 +1,6 @@
 package com.tasktodo.service.impl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -34,7 +32,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@RabbitListener(queues = "${rabbitmq.queue}")
-	public void recievedMessageFromQueue(Employee employee) {
+	public void recieveMessageFromQueue(Employee employee) {
 		employeeRepository.save(employee);
 		System.out.println("Recieved Message From RabbitMQ: " + employee);
 	}
