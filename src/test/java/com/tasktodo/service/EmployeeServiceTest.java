@@ -1,6 +1,8 @@
 package com.tasktodo.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +10,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
@@ -36,20 +37,20 @@ public class EmployeeServiceTest {
 	public void testSendMessageToQueue() {
 		Employee employee = getEmployee();
 		employeeService.sendMessageToQueue(employee);
-		Mockito.verify(rabbitTemplate).convertAndSend(null, null, employee);
+		verify(rabbitTemplate).convertAndSend(null, null, employee);
 	}
 
 	@Test
 	public void testRecieveMessageFromQueue() {
 		Employee employee = getEmployee();
 		employeeService.recieveMessageFromQueue(employee);
-		Mockito.verify(employeeRepository).save(employee);
+		verify(employeeRepository).save(employee);
 	}
 
 	@Test
 	public void testGetEmployees() {
 		List<Employee> expected = list();
-		Mockito.when(employeeRepository.findAll()).thenReturn(expected);
+		when(employeeRepository.findAll()).thenReturn(expected);
 		List<Employee> actual = employeeService.getEmployees();
 		assertEquals(expected, actual);
 	}

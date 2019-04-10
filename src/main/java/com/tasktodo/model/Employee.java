@@ -4,16 +4,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table(name = "employee")
+@XmlRootElement
 public class Employee {
 
 	@Id
 	@Column
+	@XmlElement
 	private Integer empId;
 
 	@Column
+	@XmlElement
 	private String empName;
 
 	public Integer getEmpId() {
