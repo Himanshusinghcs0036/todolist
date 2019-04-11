@@ -2,7 +2,6 @@ package com.tasktodo.controller;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -37,7 +36,7 @@ public class TaskToDoControllerIntegrationTest {
 	}
 
 	@Test
-	public void testGetTasks() throws JSONException {
+	public void testGetTasks() {
 		ResponseEntity<String> response = getResponse(null, "/tasks", HttpMethod.GET);
 		HttpStatus actual = response.getStatusCode();
 		HttpStatus expected = HttpStatus.OK;
