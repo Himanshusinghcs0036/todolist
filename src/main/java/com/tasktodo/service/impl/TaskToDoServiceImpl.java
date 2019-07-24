@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.tasktodo.exception.ErrorCode;
+import com.tasktodo.exception.InvalidDataException;
 import com.tasktodo.model.Task;
 import com.tasktodo.model.TaskResponseDto;
 import com.tasktodo.service.TaskToDoService;
@@ -19,7 +21,7 @@ public class TaskToDoServiceImpl implements TaskToDoService {
 	@Override
 	public TaskResponseDto addTask(String description) {
 		if (description == null || description.equals(""))
-			return null;
+			throw new InvalidDataException(ErrorCode.INVALID_DESCRIPTION);
 		String id = UUID.randomUUID().toString();
 		map.put(id, new Task(id, description, false));
 		return new TaskResponseDto(id);
@@ -33,7 +35,7 @@ public class TaskToDoServiceImpl implements TaskToDoService {
 	@Override
 	public String completeTask(String id) {
 		if (id == null || id.equals(""))
-			return null;
+			throw new InvalidDataException(ErrorCode.INVALID_ID);
 		Task inCompletedTask = getTasks().get(id);
 		Task completedTask = new Task(id, inCompletedTask.getDesc(), true);
 		map.put(id, completedTask);
@@ -43,7 +45,7 @@ public class TaskToDoServiceImpl implements TaskToDoService {
 	@Override
 	public String updateTask(String id, String newDesc) {
 		if (id == null || id.equals("") || newDesc == null || newDesc.equals(""))
-			return null;
+			throw new InvalidDataException(ErrorCode.INVALID_ID_OR_DESCRIPTION);
 		Task oldTask = getTasks().get(id);
 		Task updatedTask = new Task(id, newDesc, oldTask.isCompleted());
 		map.put(id, updatedTask);

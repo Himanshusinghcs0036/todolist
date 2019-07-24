@@ -1,10 +1,12 @@
 package com.tasktodo.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.tasktodo.exception.InvalidDataException;
 import com.tasktodo.model.Task;
 import com.tasktodo.model.TaskResponseDto;
 import com.tasktodo.service.impl.TaskToDoServiceImpl;
@@ -20,8 +22,8 @@ public class TaskToDoServiceTest {
 
 	@Test
 	public void testAddTaskBoundaryCases() {
-		assertEquals(null, taskToDoservice.addTask(null));
-		assertEquals(null, taskToDoservice.addTask(""));
+		assertThrows(InvalidDataException.class, () -> taskToDoservice.addTask(null));
+		assertThrows(InvalidDataException.class, () -> taskToDoservice.addTask(""));
 	}
 
 	@Test
@@ -37,7 +39,6 @@ public class TaskToDoServiceTest {
 	public void testGetTasks() {
 		TaskResponseDto responseDto1 = taskToDoservice.addTask("description1");
 		TaskResponseDto responseDto2 = taskToDoservice.addTask("description2");
-		taskToDoservice.addTask("");
 
 		String taskId1 = responseDto1.getTaskId();
 		String taskId2 = responseDto2.getTaskId();
@@ -46,6 +47,7 @@ public class TaskToDoServiceTest {
 		Task expected2 = new Task(taskId2, "description2", false);
 		Task actual2 = taskToDoservice.getTasks().get(taskId2);
 
+		assertThrows(InvalidDataException.class, () -> taskToDoservice.addTask(""));
 		assertEquals(expected1, actual1);
 		assertEquals(expected2, actual2);
 		assertEquals(2, taskToDoservice.getTasks().size());
@@ -53,8 +55,8 @@ public class TaskToDoServiceTest {
 
 	@Test
 	public void testCompleteTaskBoundaryCases() {
-		assertEquals(null, taskToDoservice.completeTask(""));
-		assertEquals(null, taskToDoservice.completeTask(null));
+		assertThrows(InvalidDataException.class, () -> taskToDoservice.completeTask(""));
+		assertThrows(InvalidDataException.class, () -> taskToDoservice.completeTask(null));
 	}
 
 	@Test
@@ -69,10 +71,10 @@ public class TaskToDoServiceTest {
 
 	@Test
 	public void updateTaskBoundaryCases() {
-		assertEquals(null, taskToDoservice.updateTask("id", null));
-		assertEquals(null, taskToDoservice.updateTask("id", ""));
-		assertEquals(null, taskToDoservice.updateTask("", "desc"));
-		assertEquals(null, taskToDoservice.updateTask(null, "desc"));
+		assertThrows(InvalidDataException.class, () -> taskToDoservice.updateTask("id", null));
+		assertThrows(InvalidDataException.class, () -> taskToDoservice.updateTask("id", ""));
+		assertThrows(InvalidDataException.class, () -> taskToDoservice.updateTask("", "desc"));
+		assertThrows(InvalidDataException.class, () -> taskToDoservice.updateTask(null, "desc"));
 	}
 
 	@Test
