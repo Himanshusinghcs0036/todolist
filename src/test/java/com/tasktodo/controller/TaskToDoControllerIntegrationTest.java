@@ -50,6 +50,6 @@ public class TaskToDoControllerIntegrationTest {
 	}
 
 	private String createURLWithPort(String uri) {
-		return "http://localhost:" + port + uri;
+		return "http://localhost:" + port + "/tasktodo" + uri;
 	}
 }
