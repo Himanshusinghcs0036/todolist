@@ -54,10 +54,11 @@ pipeline {
           script {
                 dir('dockerBuildDependencies'){
                 echo "Creating Docker Image"
+                 docker images
                  docker build -t hub.docker.com/himanshusrinet/cicddemo:todolist -f Dockerfile .
                  echo "Docker Image Created"
               }
-              }
+             }
          }
         }
     }
