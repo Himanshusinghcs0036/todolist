@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-    		label 'docker-maven-slave'
-    	}
+    agent any
 
     environment {
      		PROJECT_CREDENTIALS	 	 = '9e070679-76ee-45b0-8ea2-84cdc4c3ba25'
