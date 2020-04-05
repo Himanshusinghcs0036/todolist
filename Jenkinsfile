@@ -33,11 +33,13 @@ pipeline {
         stage('Docker build'){
             steps{
                 dir('dockerBuildDir'){
-                       withDocker([credentialsId: "${env.DOCKER_CRED}", url: "https://hub.docker.com/"]){
+                    docker.withRegistry('https://hub.docker.com/', '${env.DOCKER_CRED}'){
                             sh "echo '*********** Creating Docker Image ***********'"
-
+                            def docker_img = docker.build '${DOCKER_IMAGE_NAME}:${PROJECT_NAME}'
+                            docker_img.push()
                             sh "echo '*********** Docker Image Created ***********'"
-                       }
+                    }
+
                  }
             }
         }
