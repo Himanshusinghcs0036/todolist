@@ -24,16 +24,10 @@ pipeline {
 
     }
 
-     stage('CLONE REPO') {
-                steps {
-                    git([url: 'ssh://git@github.com/user/repname/', branch: 'master', credentialsId: 'github_cred'])
-                     sh("ls -ltrh")
-                }
-
-}
         stage('Install') {
           steps {
             scripts{
+                sh("ls -ltrh")
                 sh "echo 'Last ONE'"
             }
           }
