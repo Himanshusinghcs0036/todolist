@@ -30,7 +30,7 @@ pipeline {
                      sh("ls -ltrh")
                 }
 
-
+}
         stage('Install') {
           steps {
             scripts{
@@ -39,5 +39,7 @@ pipeline {
           }
         }
 
-    }
+
+}
+
 }
