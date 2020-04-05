@@ -26,11 +26,15 @@ pipeline {
 
         stage('Build') {
           steps {
-          withMaven(maven: 'mave'){
+                maven{
+                     goals('clean')
+                     goals('install')
+                     properties(skipTests: true)
+                }
                 sh("/usr/bin/mvn clean -DskipTests=true install")
                 sh("ls -ltrh")
                 sh("mkdir dockerBuildDir")
-               }
+
           }
         }
 
