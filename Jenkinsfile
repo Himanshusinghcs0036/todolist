@@ -24,7 +24,7 @@ pipeline {
 
     }
 
-     stage('CLONE REPO'') {
+     stage('CLONE REPO') {
                 steps {
                     git([url: 'ssh://git@github.com/user/repname/', branch: 'master', credentialsId: 'github_cred'])
                      sh("ls -ltrh")
