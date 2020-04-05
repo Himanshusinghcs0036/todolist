@@ -33,9 +33,9 @@ pipeline {
         stage('Docker build'){
             steps{
                 dir('dockerBuildDir'){
-                       withDockerRegistry([credentialsId: "${env.DOCKER_CRED}", url: "https://hub.docker.com/"]){
+                       withDocker([credentialsId: "${env.DOCKER_CRED}", url: "https://hub.docker.com/"]){
                             sh "echo '*********** Creating Docker Image ***********'"
-                            
+
                             sh "echo '*********** Docker Image Created ***********'"
                        }
                  }
