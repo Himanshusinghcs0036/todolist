@@ -24,16 +24,12 @@ pipeline {
 
     }
 
-        stage('CLONE REPO') {
-          steps {
-            withCredentials([usernamePassword(credentialsId: 'github_cred', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                sh("echo USERNAME = ${GIT_USERNAME}")
-                sh("echo PASSWORD = ${GIT_USERNAME}")
-                sh('git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com:Himanshusinghcs0036/todolist.git')
-                sh("ls -ltrh")
-            }
-          }
-        }
+     stage('CLONE REPO'') {
+                steps {
+                    git([url: 'ssh://git@github.com/user/repname/', branch: 'master', credentialsId: 'github_cred'])
+                     sh("ls -ltrh")
+                }
+
 
         stage('Install') {
           steps {
