@@ -25,12 +25,8 @@ pipeline {
     }
 
         stage('Build') {
-          steps {
-                maven('clean install' , 'pom.xml')
-                sh("ls -ltrh")
-                sh("mkdir dockerBuildDir")
-
-          }
+            withMaven(maven : 'maven') {
+            bat 'mvn clean install'
         }
 
         stage('Docker Build Initialize') {
