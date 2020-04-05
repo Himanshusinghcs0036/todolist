@@ -26,7 +26,7 @@ pipeline {
 
         stage('Build') {
           steps {
-                maven(clean  install , pom.xml)
+                maven('clean install' , 'pom.xml')
                 mavne{
                     properties(skipTests: true)
                 }
