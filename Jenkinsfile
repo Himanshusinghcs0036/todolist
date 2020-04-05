@@ -27,7 +27,9 @@ pipeline {
         stage('Build') {
             steps{
             withMaven(maven : 'maven') {
-            sh 'mvn clean install'
+            sh 'mvn clean -DskipTests=true install'
+            sh "mkdir dockerBuildDir"
+            sh "ls -ltrh"
             }
         }
         }
