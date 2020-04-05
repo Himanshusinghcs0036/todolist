@@ -33,8 +33,9 @@ pipeline {
         stage('Docker build'){
             steps{
                 dir('dockerBuildDir'){
-                    withDockerRegistry(credentialsId: 'docker_cred') {
+                    docker.withRegistry(url[ 'https://hub.docker.com/' , 'docker_cred']){
                         sh "echo '*********** Creating Docker Image ***********'"
+                        docker.build('himanshusrinet/cicddemo:sampletag','-f Dockerfile .')
                     }
                  }
             }
