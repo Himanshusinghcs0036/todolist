@@ -25,7 +25,7 @@ pipeline {
     }
         stage('Compile') {
           steps {
-            checkout([$class: ‘GitSCM’, branches: [[name: ‘master’]], userRemoteConfigs: [[url: ‘https://github.com/Himanshusinghcs0036/todolist’]]])
+            checkout([$class: ‘GitSCM’, branches: [[name: ‘master’]], userRemoteConfigs: [[url: ‘github.com/Himanshusinghcs0036/todolist’]]])
           }
         }
 
