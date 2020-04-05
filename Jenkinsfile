@@ -26,10 +26,8 @@ pipeline {
 
         stage('Install') {
           steps {
-            scripts{
                 sh("ls -ltrh")
                 sh "echo 'Last ONE'"
-            }
           }
         }
 
