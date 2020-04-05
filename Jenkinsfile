@@ -28,6 +28,7 @@ pipeline {
             withMaven(maven : 'maven') {
             bat 'mvn clean install'
         }
+        }
 
         stage('Docker Build Initialize') {
                   steps {
