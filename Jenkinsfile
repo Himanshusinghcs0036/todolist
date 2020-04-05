@@ -35,7 +35,6 @@ pipeline {
           steps {
             withMaven(maven : 'maven') {
                 sh 'mvn -DskipTests=true clean install'
-                sh
             }
           }
         }
