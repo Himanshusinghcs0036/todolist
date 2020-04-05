@@ -25,11 +25,7 @@ pipeline {
     }
         stage('Compile') {
           steps {
-            scripts {
-                echo $PWD
-                git clone https://github.com/Himanshusinghcs0036/todolist
-                sh 'mvn -DskipTests=true clean compile'
-            }
+            checkout([$class: ‘GitSCM’, branches: [[name: ‘master’]], userRemoteConfigs: [[url: ‘https://github.com/Himanshusinghcs0036/todolist’]]])
           }
         }
 
