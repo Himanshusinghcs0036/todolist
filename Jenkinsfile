@@ -29,7 +29,7 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'github_cred', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                 sh("echo USERNAME = ${GIT_USERNAME}")
                 sh("echo PASSWORD = ${GIT_USERNAME}")
-                sh('git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Himanshusinghcs0036/todolist --tags')
+                sh('git clone https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/Himanshusinghcs0036/todolist')
                 sh("ls -ltrh")
             }
           }
