@@ -34,7 +34,7 @@ pipeline {
             steps{
                 dir('dockerBuildDir'){
                     sh "echo ${env.DOCKER_IMAGE_NAME}"
-                    docker.build ${env.DOCKER_IMAGE_NAME}':'${env.PROJECT_NAME}
+                    docker.build ${env.DOCKER_IMAGE_NAME}+":"+${env.PROJECT_NAME}
                  }
             }
         }
