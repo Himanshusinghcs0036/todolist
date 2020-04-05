@@ -27,7 +27,6 @@ pipeline {
           steps {
             withMaven(maven : 'maven') {
                 echo $PWD
-                echo ${WORKSPACE}
                 sh 'mvn -DskipTests=true clean compile'
             }
           }
