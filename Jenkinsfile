@@ -5,7 +5,8 @@ pipeline {
      		APPROVAL_AUDIENCE		 = "himanshusinghcs0036@gmail.com"
      		NOTIFICATION_AUDIENCE 	 = "himanshusinghcs0036@gmail.com"
      		PROJECT_NAME			 = 'javatodolist'
-            registryCredential = 'docker_cred'
+     		DOCKER_IMAGE_NAME        = "himanshusrinet/cicddemo"
+            DOCKER_CRED = 'docker_cred'
      	}
 
     stages {
@@ -31,8 +32,12 @@ pipeline {
         stage('Docker build'){
             steps{
                 dir('dockerBuildDir'){
-                                 sh "echo 'Creating Docker Image'"
-                                 sh "docker images"
+                       withDockerRegistry([credentialsId: "${env.DOCKER_CRED}", url: "https://hub.docker.com/"]){
+                            sh "echo '*********** Creating Docker Image ***********'"
+                            sh "docker build -t ${ev.DOCKER_IMAGE_NAME}:${PROJECT_NAME} -f Dockerfile ."
+                            sh "docker push ${ev.DOCKER_IMAGE_NAME}:${PROJECT_NAME}"
+                            sh "echo '*********** Docker Image Created ***********'"
+                       }
                  }
             }
         }
