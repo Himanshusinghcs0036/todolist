@@ -35,8 +35,7 @@ pipeline {
                 dir('dockerBuildDir'){
                        withDockerRegistry([credentialsId: "${env.DOCKER_CRED}", url: "https://hub.docker.com/"]){
                             sh "echo '*********** Creating Docker Image ***********'"
-                            sh "docker build -t ${ev.DOCKER_IMAGE_NAME}:${PROJECT_NAME} -f Dockerfile ."
-                            sh "docker push ${ev.DOCKER_IMAGE_NAME}:${PROJECT_NAME}"
+                            
                             sh "echo '*********** Docker Image Created ***********'"
                        }
                  }
