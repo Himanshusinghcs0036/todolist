@@ -33,8 +33,9 @@ pipeline {
         stage('Docker build'){
             steps{
                 dir('dockerBuildDir'){
-                    sh "echo ${env.DOCKER_IMAGE_NAME}"
-                    docker.build ${env.DOCKER_IMAGE_NAME} + ":" + ${env.PROJECT_NAME}
+                    withDockerRegistry(credentialsId: 'docker_cred', toolName: 'docker', url: 'https://hub.docker.com/') {
+                        sh "echo '*********** Creating Docker Image ***********'"
+                    }
                  }
             }
         }
