@@ -31,8 +31,8 @@ pipeline {
 
         stage('Install') {
           steps {
-            withMaven(maven : 'maven') {
-                sh 'mvn -DskipTests=true clean install'
+            scripts{
+                echo "Last ONE"
             }
           }
         }
