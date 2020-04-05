@@ -26,11 +26,7 @@ pipeline {
 
         stage('Build') {
           steps {
-                maven{
-                     goals('clean')
-                     goals('install')
-                     properties(skipTests: true)
-                }
+                maven(clean -DskipTests=true install , pom.xml)
                 sh("ls -ltrh")
                 sh("mkdir dockerBuildDir")
 
