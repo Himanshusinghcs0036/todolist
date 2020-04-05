@@ -25,8 +25,9 @@ pipeline {
     }
         stage('Compile') {
           steps {
-            withMaven(maven : 'maven') {
+            scripts {
                 echo $PWD
+                git clone https://github.com/Himanshusinghcs0036/todolist
                 sh 'mvn -DskipTests=true clean compile'
             }
           }
