@@ -24,12 +24,22 @@ pipeline {
 
     }
 
-        stage('Install') {
+        stage('Build') {
           steps {
+                sh("mvn clean -DskipTests=true install")
                 sh("ls -ltrh")
-                sh "echo 'Last ONE'"
+                sh("mkdir dockerBuildDir")
           }
         }
+
+        stage('Docker Build Initialize') {
+                  steps {
+                       sh("cp target/tasktodo-0.0.1-SNAPSHOT.jar dockerBuildDir/tasktodo-0.0.1-SNAPSHOT.jar")
+                       sh("cp Dockerfile dockerBuildDir/")
+                       sh("ls -ltrh dockerBuildDir/")
+                  }
+                }
+
 
 
 }
