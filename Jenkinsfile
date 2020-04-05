@@ -40,14 +40,5 @@ pipeline {
           }
         }
 
-            stage('Intitialize For Docker Build'){
-                 script {
-                 					echo " loading jar to docker directory"
-                 					sh 'mkdir -p dockerBuildDependencies'
-                 					sh 'cp ${WORKSPACE}/target/tasktodo-0.0.1-SNAPSHOT.jar ./dockerBuildDependencies/'
-                 					sh 'cp ./Dockerfile ./dockerBuildDependencies/Dockerfile'
-                 				}
-               }
-
     }
 }
